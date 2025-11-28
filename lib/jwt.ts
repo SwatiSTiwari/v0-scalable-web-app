@@ -1,7 +1,7 @@
 // Simple JWT implementation for demo
 // In production, use a proper JWT library like jsonwebtoken
 
-const SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production"
+const SECRET = process.env.JWT_SECRET!
 
 interface Payload {
   userId: string

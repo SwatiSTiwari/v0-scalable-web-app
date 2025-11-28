@@ -1,7 +1,7 @@
 import crypto from "crypto"
-import { MongoClient, type Db } from "mongodb"
+import { MongoClient, type Db, type Filter, type Document } from "mongodb"
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017"
+const MONGODB_URI = process.env.MONGODB_URI!
 const DB_NAME = "scalable_web_app"
 
 export interface User {
@@ -56,7 +56,7 @@ function generateId(): string {
   return crypto.randomUUID()
 }
 
-function normalizeUser(user: any): User {
+function normalizeUser(user: any): User | null {
   if (!user) return null
   return {
     id: user._id?.toString() || user.id,
@@ -67,7 +67,7 @@ function normalizeUser(user: any): User {
   }
 }
 
-function normalizeTask(task: any): Task {
+function normalizeTask(task: any): Task | null {
   if (!task) return null
   return {
     id: task._id?.toString() || task.id,
@@ -97,7 +97,7 @@ const dbOperations = {
     try {
       const database = await getDatabase()
       const usersCollection = database.collection("users")
-      const user = await usersCollection.findOne({ _id: id })
+      const user = await usersCollection.findOne({ _id: id as any })
       return user ? normalizeUser(user) : null
     } catch (error) {
       console.error("[v0] Error finding user by id:", error)
@@ -120,7 +120,7 @@ const dbOperations = {
       }
 
       await usersCollection.insertOne(user)
-      return normalizeUser(user)
+      return normalizeUser(user)!
     } catch (error) {
       console.error("[v0] Error creating user:", error)
       throw error
@@ -145,8 +145,8 @@ const dbOperations = {
       const database = await getDatabase()
       const usersCollection = database.collection("users")
 
-      const { result } = await usersCollection.findOneAndUpdate(
-        { _id: id },
+      const result = await usersCollection.findOneAndUpdate(
+        { _id: id as any },
         { $set: updates },
         { returnDocument: "after" },
       )
@@ -175,7 +175,7 @@ const dbOperations = {
       }
 
       await tasksCollection.insertOne(task)
-      return normalizeTask(task)
+      return normalizeTask(task)!
     } catch (error) {
       console.error("[v0] Error creating task:", error)
       throw error
@@ -187,7 +187,7 @@ const dbOperations = {
       const database = await getDatabase()
       const tasksCollection = database.collection("tasks")
       const tasks = await tasksCollection.find({ userId }).toArray()
-      return tasks.map(normalizeTask)
+      return tasks.map(normalizeTask).filter((t): t is Task => t !== null)
     } catch (error) {
       console.error("[v0] Error getting tasks:", error)
       throw error
@@ -198,7 +198,7 @@ const dbOperations = {
     try {
       const database = await getDatabase()
       const tasksCollection = database.collection("tasks")
-      const task = await tasksCollection.findOne({ _id: id })
+      const task = await tasksCollection.findOne({ _id: id as any })
       return task ? normalizeTask(task) : null
     } catch (error) {
       console.error("[v0] Error getting task by id:", error)
@@ -211,8 +211,8 @@ const dbOperations = {
       const database = await getDatabase()
       const tasksCollection = database.collection("tasks")
 
-      const { result } = await tasksCollection.findOneAndUpdate(
-        { _id: id },
+      const result = await tasksCollection.findOneAndUpdate(
+        { _id: id as any },
         { $set: { ...updates, updatedAt: new Date() } },
         { returnDocument: "after" },
       )
@@ -228,7 +228,7 @@ const dbOperations = {
     try {
       const database = await getDatabase()
       const tasksCollection = database.collection("tasks")
-      const result = await tasksCollection.deleteOne({ _id: id })
+      const result = await tasksCollection.deleteOne({ _id: id as any })
       return result.deletedCount > 0
     } catch (error) {
       console.error("[v0] Error deleting task:", error)

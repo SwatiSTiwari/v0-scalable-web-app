@@ -2,8 +2,24 @@
 
 import { useState, useEffect, useCallback } from "react"
 
+interface User {
+  id: string
+  email: string
+  name: string
+}
+
+interface Task {
+  id: string
+  userId: string
+  title: string
+  description: string
+  status: "pending" | "completed"
+  createdAt: Date
+  updatedAt: Date
+}
+
 export function useAuth() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -57,7 +73,7 @@ export function useAuth() {
 }
 
 export function useTasks(userId?: string) {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(false)
 
   const fetchTasks = useCallback(async () => {

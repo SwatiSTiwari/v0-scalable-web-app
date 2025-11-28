@@ -5,25 +5,26 @@ A production-ready web application built with Next.js featuring user authenticat
 ## Features
 
 - **User Authentication**
+
   - Secure signup and login
   - JWT-based authentication (24-hour tokens)
   - HTTP-only cookie storage
   - Password hashing with SHA-256
-
 - **Dashboard**
+
   - User profile display
   - Task management (Create, Read, Update, Delete)
   - Search functionality
   - Filter by task status (All, Pending, Completed)
   - Real-time task status updates
-
 - **Security**
+
   - Input validation with Zod
   - Protected API endpoints
   - CORS-ready configuration
   - Error handling and logging
-
 - **Responsive Design**
+
   - Mobile-first approach
   - Tailwind CSS styling
   - Shadcn/UI components
@@ -32,32 +33,31 @@ A production-ready web application built with Next.js featuring user authenticat
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
-\`\`\`bash
-git clone <repository-url>
-cd scalable-web-app
-\`\`\`
-
+   \`\`\`bash
+   git clone `<https://github.com/SwatiSTiwari/v0-scalable-web-app.git>`
+   cd scalable-web-app
+   \`\`\`
 2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
-
+   \`\`\`bash
+   npm install
+   \`\`\`
 3. Start the development server:
-\`\`\`bash
-npm run dev
-\`\`\`
-
+   \`\`\`bash
+   npm run dev
+   \`\`\`
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Demo Credentials
 
 For testing purposes, a demo account is pre-seeded:
+
 - **Email:** demo@example.com
 - **Password:** demo@123
 
@@ -111,12 +111,14 @@ SCALABILITY_GUIDE.md    # Production scaling guide
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/signup` - Create new account
 - `POST /api/auth/login` - Login
 - `GET /api/auth/me` - Get current user
 - `POST /api/auth/logout` - Logout
 
 ### Tasks
+
 - `GET /api/tasks` - Get all user tasks
 - `POST /api/tasks` - Create new task
 - `GET /api/tasks/[id]` - Get specific task
@@ -138,26 +140,12 @@ npm install --save-dev jest @testing-library/react @testing-library/jest-dom
 ### Code Quality
 
 The project uses:
+
 - TypeScript for type safety
 - Zod for runtime validation
 - ESLint for code linting
 
-## Production Deployment
-
-### Deploying to Vercel (Recommended)
-
-1. Push code to GitHub
-2. Import project in Vercel dashboard
-3. Add environment variable: `JWT_SECRET`
-4. Deploy
-
-\`\`\`bash
-vercel deploy
 \`\`\`
-
-### Deploying to Other Platforms
-
-See [SCALABILITY_GUIDE.md](./SCALABILITY_GUIDE.md) for comprehensive deployment options and strategies.
 
 ### Environment Variables
 
@@ -184,12 +172,14 @@ NODE_ENV=development
 ## Performance Optimization
 
 ### Current Optimizations
+
 - HTTP-only cookies prevent XSS attacks
 - JWT tokens are stateless and scale horizontally
 - Client-side caching with React hooks
 - Optimized database queries
 
 ### Future Optimizations
+
 - Implement Redis caching layer
 - Add database indexing
 - Enable response compression
@@ -213,16 +203,14 @@ See [SCALABILITY_GUIDE.md](./SCALABILITY_GUIDE.md) for detailed scaling roadmap.
 Currently uses an in-memory database for demonstration. To migrate to PostgreSQL:
 
 1. Install Prisma:
-\`\`\`bash
-npm install @prisma/client
-npm install -D prisma
-\`\`\`
-
+   \`\`\`bash
+   npm install @prisma/client
+   npm install -D prisma
+   \`\`\`
 2. Initialize Prisma:
-\`\`\`bash
-npx prisma init
-\`\`\`
-
+   \`\`\`bash
+   npx prisma init
+   \`\`\`
 3. Update `lib/db.ts` to use Prisma Client
 4. Define database schema in `prisma/schema.prisma`
 5. Run migrations
@@ -230,43 +218,26 @@ npx prisma init
 ## Troubleshooting
 
 ### Login not working
+
 1. Check that credentials match (demo@example.com / demo@123)
 2. Verify JWT_SECRET is set correctly
 3. Check browser cookies are enabled
 4. Review console logs for error messages
 
 ### Tasks not saving
+
 1. Verify user is authenticated
 2. Check network tab in DevTools for API errors
 3. Ensure localStorage is not disabled
 4. Try clearing cookies and logging in again
 
 ### CORS errors
+
 1. Check API_DOCUMENTATION.md for allowed origins
 2. Ensure backend is running on correct port
 3. Verify CORS headers are set correctly
 
-## Contributing
-
-To contribute to this project:
-
-1. Create a feature branch
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
-
-## License
-
-MIT
-
-## Support
-
-For issues or questions:
-1. Check [API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
-2. Review [SCALABILITY_GUIDE.md](./SCALABILITY_GUIDE.md)
-3. Open an issue on GitHub
-
-## Roadmap
+## ..Roadmap
 
 - [ ] Email verification
 - [ ] Password reset flow
@@ -282,6 +253,7 @@ For issues or questions:
 ## Credits
 
 Built with:
+
 - [Next.js](https://nextjs.org/)
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
