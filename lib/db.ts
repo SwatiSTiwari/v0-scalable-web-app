@@ -24,24 +24,38 @@ export interface Task {
   updatedAt: Date
 }
 
-let mongoClient: MongoClient | null = null
-let database: Db | null = null
-
-async function getMongoClient(): Promise<MongoClient> {
-  if (!mongoClient) {
-    mongoClient = new MongoClient(MONGODB_URI)
-    await mongoClient.connect()
-    console.log("[v0] MongoDB connected")
-  }
-  return mongoClient
-}
+// Global variable to cache the MongoDB client across serverless function invocations
+let cachedClient: MongoClient | null = null
+let cachedDb: Db | null = null
 
 async function getDatabase(): Promise<Db> {
-  if (!database) {
-    const client = await getMongoClient()
-    database = client.db(DB_NAME)
+  // If we have a cached connection, verify it's still valid
+  if (cachedClient && cachedDb) {
+    try {
+      // Ping to check if connection is alive
+      await cachedClient.db("admin").command({ ping: 1 })
+      return cachedDb
+    } catch (e) {
+      // Connection is stale, reset cache
+      cachedClient = null
+      cachedDb = null
+    }
   }
-  return database
+
+  // Create new connection
+  const client = new MongoClient(MONGODB_URI, {
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+  })
+  
+  await client.connect()
+  console.log("[v0] MongoDB connected")
+  
+  cachedClient = client
+  cachedDb = client.db(DB_NAME)
+  
+  return cachedDb
 }
 
 function hashPassword(password: string): string {
