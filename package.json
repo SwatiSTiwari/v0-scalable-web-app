@@ -51,7 +51,7 @@
     "input-otp": "1.4.1",
     "kerberos": "latest",
     "lucide-react": "^0.454.0",
-    "mongodb": "latest",
+    "mongodb": "^7.0.0",
     "mongodb-client-encryption": "latest",
     "next": "16.0.3",
     "next-themes": "latest",

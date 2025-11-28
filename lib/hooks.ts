@@ -6,6 +6,7 @@ interface User {
   id: string
   email: string
   name: string
+  createdAt?: string
 }
 
 interface Task {
@@ -14,8 +15,8 @@ interface Task {
   title: string
   description: string
   status: "pending" | "completed"
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
 export function useAuth() {

@@ -14,6 +14,7 @@ export const loginSchema = z.object({
 export const taskSchema = z.object({
   title: z.string().min(1, "Title is required").max(100, "Title must be less than 100 characters"),
   description: z.string().max(500, "Description must be less than 500 characters").optional().default(""),
+  status: z.enum(["pending", "completed"]).optional(),
 })
 
 export type SignupInput = z.infer<typeof signupSchema>

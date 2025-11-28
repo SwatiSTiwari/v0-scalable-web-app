@@ -83,7 +83,11 @@ export default function DashboardPage() {
 
           <div className="lg:col-span-2 space-y-6">
             <TaskForm onSubmit={addTask} />
-            <TaskList tasks={tasks} onToggle={updateTask} onDelete={deleteTask} />
+            <TaskList 
+              tasks={tasks} 
+              onToggle={async (id, status) => updateTask(id, { status })} 
+              onDelete={deleteTask} 
+            />
           </div>
         </div>
       </div>
