@@ -1,5 +1,5 @@
 import crypto from "crypto"
-import { MongoClient, type Db, type Filter, type Document, ServerApiVersion } from "mongodb"
+import { MongoClient, type Db, type Filter, type Document } from "mongodb"
 
 const MONGODB_URI = process.env.MONGODB_URI!
 const DB_NAME = "scalable_web_app"
@@ -42,16 +42,13 @@ async function getDatabase(): Promise<Db> {
     }
   }
 
-  // Create new connection with Server API version for better compatibility
+  // Create new connection - simplified for Vercel compatibility
   const client = new MongoClient(MONGODB_URI, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
     maxPoolSize: 10,
     serverSelectionTimeoutMS: 10000,
     socketTimeoutMS: 45000,
+    retryWrites: true,
+    w: "majority",
   })
   
   await client.connect()
