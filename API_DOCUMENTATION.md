@@ -26,9 +26,9 @@ Create a new user account.
 **Request:**
 \`\`\`json
 {
-  "email": "user@example.com",
-  "password": "securePassword123",
-  "name": "John Doe"
+  "email": "contact.auctionwale@gmail.com",
+  "password": "12345678",
+  "name": "auctionwale"
 }
 <img width="2336" height="1642" alt="image" src="https://github.com/user-attachments/assets/efcb7a92-f59c-4636-b57f-7ba78e26c024" />
 \`\`\`
@@ -52,8 +52,8 @@ Authenticate user with credentials.
 **Request:**
 \`\`\`json
 {
-  "email": "user@example.com",
-  "password": "securePassword123"
+  "email": "swatistiwati13@gmail.com",
+  "password": "1234567890"
 }
 
 <img width="2342" height="1646" alt="image" src="https://github.com/user-attachments/assets/87e6a32d-fd82-4dbe-ab1a-ae35381a5040" />
