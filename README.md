@@ -1,4 +1,4 @@
-# Scalable Web App with Authentication & Dashboard
+# oScalable Web App with Authentication & Dashboard
 
 A production-ready web application built with Next.js featuring user authentication, JWT-based security, and a task management dashboard.
 
@@ -53,7 +53,6 @@ A production-ready web application built with Next.js featuring user authenticat
    npm run dev
    \`\`\`
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
 
 ## Project Structure
 
@@ -192,10 +191,9 @@ The app is structured to scale from development to production:
 
 See [SCALABILITY_GUIDE.md](./SCALABILITY_GUIDE.md) for detailed scaling roadmap.
 
-
 ### Login not working
 
-1. Check that credentials match (demo@example.com / demo@123)
+1. Check that credentials match
 2. Verify JWT_SECRET is set correctly
 3. Check browser cookies are enabled
 4. Review console logs for error messages

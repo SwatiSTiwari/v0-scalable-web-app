@@ -49,11 +49,7 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="mt-8 space-y-2 text-sm text-muted-foreground">
-          <p>Demo credentials:</p>
-          <p>Email: demo@example.com</p>
-          <p>Password: demo@123</p>
-        </div>
+        
       </div>
     </main>
   )
